@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+
+<style>
+body{
+    background:#0f0c29;
+    color:white;
+    text-align:center;
+}
+
+input{
+    padding:10px;
+    margin:5px;
+}
+
+button{
+    padding:10px;
+    background:#00aaff;
+    color:white;
+    border:none;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Admin Panel</h2>
+
+<input type="text" id="pkgName" placeholder="Package Name">
+<input type="number" id="pkgPrice" placeholder="Price">
+
+<button onclick="addPackage()">Add Package</button>
+
+<h3>All Packages</h3>
+<div id="packages"></div>
+
+<script>
+
+// ADD PACKAGE
+function addPackage(){
+    let name = document.getElementById("pkgName").value;
+    let price = document.getElementById("pkgPrice").value;
+
+    let packages = JSON.parse(localStorage.getItem("packages")) || [];
+
+    packages.push({name, price});
+
+    localStorage.setItem("packages", JSON.stringify(packages));
+
+    showPackages();
+}
+
+// SHOW PACKAGES
+function showPackages(){
+    let packages = JSON.parse(localStorage.getItem("packages")) || [];
+
+    let html = "";
+
+    packages.forEach(p => {
+        html += `<p>${p.name} - ₹${p.price}</p>`;
+    });
+
+    document.getElementById("packages").innerHTML = html;
+}
+
+window.onload = showPackages;
+
+</script>
+
+</body>
+</html>

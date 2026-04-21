@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment - The Grafinity</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+    color: white;
+    text-align: center;
+    padding: 50px;
+}
+
+.box {
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
+    margin: auto;
+}
+
+select, input {
+    padding: 10px;
+    width: 90%;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn {
+    background: #00aaff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.box {
+    box-shadow: 0 0 20px rgba(0,150,255,0.5);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Choose Your Package</h1>
+
+<div class="box">
+
+    <!-- Package Select -->
+    <select id="package" onchange="setAmount()">
+        <option value="">Select Package</option>
+        <option value="199">1 Photo - ₹199</option>
+        <option value="499">3 Photos - ₹499</option>
+        <option value="849">5 Photos - ₹849</option>
+        <option value="399">1-20s videos - ₹399</option>
+        <option value="599">1-30s video - ₹599</option>
+        <option value="1399">3 Photo + 1- 60s Video - ₹1399 (20% off)</option>
+        <option value="1949">5 Photo + 1- 60s Video - ₹1949 (5% off)</option>
+        <option value="2660">3-videos(15s,30s,45s)+10 photos - ₹2660 (30% off)</option>
+ 
+    </select>
+
+    <!-- Amount -->
+    <input type="number" id="amount" placeholder="Enter Amount">
+
+    <!-- Pay Button -->
+    <button class="btn" onclick="payNow()">Proceed to Pay</button>
+
+</div>
+
+<script>
+
+function setAmount(){
+    let pkg = document.getElementById("package").value;
+    document.getElementById("amount").value = pkg;
+}
+
+function payNow(){
+    let amount = document.getElementById("amount").value;
+
+    if(amount == ""){
+        alert("Enter amount ❌");
+        return;
+    }
+
+    let upiLink = "upi://pay?pa=9876543210@paytm&pn=TheGrafinity&am=" + amount + "&cu=INR";
+
+    window.location.href = upiLink;
+}
+
+</script>
+
+</body>
+</html>
